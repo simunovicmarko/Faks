@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:63562/Service1.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/simunovic_marko_WCF" />
+  <xs:element name="UstvariUporabnika">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="uporabniskoIme" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="geslo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="admin" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UstvariUporabnikaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/simunovic_marko_WCF" minOccurs="0" name="UstvariUporabnikaResult" nillable="true" type="q1:Uporabnik" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UstvariAtleta">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ime" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="priimek" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="datumRojstva" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UstvariAtletaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/simunovic_marko_WCF" minOccurs="0" name="UstvariAtletaResult" nillable="true" type="q2:Atlet" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UstvariTekmovanje">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="naziv" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="kraj" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="datumTekmovanja" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UstvariTekmovanjeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/simunovic_marko_WCF" minOccurs="0" name="UstvariTekmovanjeResult" nillable="true" type="q3:Tekmovanje" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UstvariTekmovanjeAtlet">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/simunovic_marko_WCF" minOccurs="0" name="atlet" nillable="true" type="q4:Atlet" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/simunovic_marko_WCF" minOccurs="0" name="tekmovanje" nillable="true" type="q5:Tekmovanje" />
+        <xs:element minOccurs="0" name="rezultat" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UstvariTekmovanjeAtletResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/simunovic_marko_WCF" minOccurs="0" name="UstvariTekmovanjeAtletResult" nillable="true" type="q6:AtletTekmovanje" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VpisUporabnika">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VpisUporabnikaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/simunovic_marko_WCF" minOccurs="0" name="VpisUporabnikaResult" nillable="true" type="q7:Uporabnik" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VsiAtletiNaTekmovanju">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="naziv" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VsiAtletiNaTekmovanjuResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/simunovic_marko_WCF" minOccurs="0" name="VsiAtletiNaTekmovanjuResult" nillable="true" type="q8:ArrayOfAtlet" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VsaTekmovanjaNaKaterihNastopAtlet">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ime" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="priimek" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VsaTekmovanjaNaKaterihNastopAtletResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/simunovic_marko_WCF" minOccurs="0" name="VsaTekmovanjaNaKaterihNastopAtletResult" nillable="true" type="q9:ArrayOfTekmovanje" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PodrobnostiAtleta">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ime" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="priimek" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PodrobnostiAtletaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/simunovic_marko_WCF" minOccurs="0" name="PodrobnostiAtletaResult" nillable="true" type="q10:Atlet" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TekmovanjeZNajvecAtleti">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TekmovanjeZNajvecAtletiResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/simunovic_marko_WCF" minOccurs="0" name="TekmovanjeZNajvecAtletiResult" nillable="true" type="q11:Tekmovanje" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NajstarejsiAtlet">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NajstarejsiAtletResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/simunovic_marko_WCF" minOccurs="0" name="NajstarejsiAtletResult" nillable="true" type="q12:Atlet" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PovprecnaStarostAtleta">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PovprecnaStarostAtletaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PovprecnaStarostAtletaResult" type="xs:double" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VsiAtleti">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VsiAtletiResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/simunovic_marko_WCF" minOccurs="0" name="VsiAtletiResult" nillable="true" type="q13:ArrayOfAtlet" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VsaTekmovanja">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VsaTekmovanjaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/simunovic_marko_WCF" minOccurs="0" name="VsaTekmovanjaResult" nillable="true" type="q14:ArrayOfTekmovanje" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

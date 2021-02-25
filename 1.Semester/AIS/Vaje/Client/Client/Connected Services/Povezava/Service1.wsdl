@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Service1" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:63562/Service1.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:63562/Service1.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:63562/Service1.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/simunovic_marko_WCF" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IDeloSSeznami_UstvariUporabnika_InputMessage">
+    <wsdl:part name="parameters" element="tns:UstvariUporabnika" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_UstvariUporabnika_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UstvariUporabnikaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_UstvariAtleta_InputMessage">
+    <wsdl:part name="parameters" element="tns:UstvariAtleta" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_UstvariAtleta_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UstvariAtletaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_UstvariTekmovanje_InputMessage">
+    <wsdl:part name="parameters" element="tns:UstvariTekmovanje" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_UstvariTekmovanje_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UstvariTekmovanjeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_UstvariTekmovanjeAtlet_InputMessage">
+    <wsdl:part name="parameters" element="tns:UstvariTekmovanjeAtlet" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_UstvariTekmovanjeAtlet_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UstvariTekmovanjeAtletResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_VpisUporabnika_InputMessage">
+    <wsdl:part name="parameters" element="tns:VpisUporabnika" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_VpisUporabnika_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VpisUporabnikaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_VsiAtletiNaTekmovanju_InputMessage">
+    <wsdl:part name="parameters" element="tns:VsiAtletiNaTekmovanju" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_VsiAtletiNaTekmovanju_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VsiAtletiNaTekmovanjuResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_VsaTekmovanjaNaKaterihNastopAtlet_InputMessage">
+    <wsdl:part name="parameters" element="tns:VsaTekmovanjaNaKaterihNastopAtlet" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_VsaTekmovanjaNaKaterihNastopAtlet_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VsaTekmovanjaNaKaterihNastopAtletResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_PodrobnostiAtleta_InputMessage">
+    <wsdl:part name="parameters" element="tns:PodrobnostiAtleta" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_PodrobnostiAtleta_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PodrobnostiAtletaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_TekmovanjeZNajvecAtleti_InputMessage">
+    <wsdl:part name="parameters" element="tns:TekmovanjeZNajvecAtleti" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_TekmovanjeZNajvecAtleti_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TekmovanjeZNajvecAtletiResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_NajstarejsiAtlet_InputMessage">
+    <wsdl:part name="parameters" element="tns:NajstarejsiAtlet" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_NajstarejsiAtlet_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NajstarejsiAtletResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_PovprecnaStarostAtleta_InputMessage">
+    <wsdl:part name="parameters" element="tns:PovprecnaStarostAtleta" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_PovprecnaStarostAtleta_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PovprecnaStarostAtletaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_VsiAtleti_InputMessage">
+    <wsdl:part name="parameters" element="tns:VsiAtleti" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_VsiAtleti_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VsiAtletiResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_VsaTekmovanja_InputMessage">
+    <wsdl:part name="parameters" element="tns:VsaTekmovanja" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_VsaTekmovanja_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VsaTekmovanjaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_DodajAtleta_InputMessage">
+    <wsdl:part name="parameters" element="tns:DodajAtleta" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_DodajAtleta_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DodajAtletaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_VrniAtlete_InputMessage">
+    <wsdl:part name="parameters" element="tns:VrniAtlete" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_VrniAtlete_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VrniAtleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_Uredi_InputMessage">
+    <wsdl:part name="parameters" element="tns:Uredi" />
+  </wsdl:message>
+  <wsdl:message name="IDeloSSeznami_Uredi_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UrediResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IDeloSSeznami">
+    <wsdl:operation name="UstvariUporabnika">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDeloSSeznami/UstvariUporabnika" message="tns:IDeloSSeznami_UstvariUporabnika_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDeloSSeznami/UstvariUporabnikaResponse" message="tns:IDeloSSeznami_UstvariUporabnika_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UstvariAtleta">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDeloSSeznami/UstvariAtleta" message="tns:IDeloSSeznami_UstvariAtleta_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDeloSSeznami/UstvariAtletaResponse" message="tns:IDeloSSeznami_UstvariAtleta_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UstvariTekmovanje">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDeloSSeznami/UstvariTekmovanje" message="tns:IDeloSSeznami_UstvariTekmovanje_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDeloSSeznami/UstvariTekmovanjeResponse" message="tns:IDeloSSeznami_UstvariTekmovanje_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UstvariTekmovanjeAtlet">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDeloSSeznami/UstvariTekmovanjeAtlet" message="tns:IDeloSSeznami_UstvariTekmovanjeAtlet_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDeloSSeznami/UstvariTekmovanjeAtletResponse" message="tns:IDeloSSeznami_UstvariTekmovanjeAtlet_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VpisUporabnika">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDeloSSeznami/VpisUporabnika" message="tns:IDeloSSeznami_VpisUporabnika_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDeloSSeznami/VpisUporabnikaResponse" message="tns:IDeloSSeznami_VpisUporabnika_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VsiAtletiNaTekmovanju">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDeloSSeznami/VsiAtletiNaTekmovanju" message="tns:IDeloSSeznami_VsiAtletiNaTekmovanju_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDeloSSeznami/VsiAtletiNaTekmovanjuResponse" message="tns:IDeloSSeznami_VsiAtletiNaTekmovanju_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VsaTekmovanjaNaKaterihNastopAtlet">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDeloSSeznami/VsaTekmovanjaNaKaterihNastopAtlet" message="tns:IDeloSSeznami_VsaTekmovanjaNaKaterihNastopAtlet_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDeloSSeznami/VsaTekmovanjaNaKaterihNastopAtletResponse" message="tns:IDeloSSeznami_VsaTekmovanjaNaKaterihNastopAtlet_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PodrobnostiAtleta">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDeloSSeznami/PodrobnostiAtleta" message="tns:IDeloSSeznami_PodrobnostiAtleta_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDeloSSeznami/PodrobnostiAtletaResponse" message="tns:IDeloSSeznami_PodrobnostiAtleta_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TekmovanjeZNajvecAtleti">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDeloSSeznami/TekmovanjeZNajvecAtleti" message="tns:IDeloSSeznami_TekmovanjeZNajvecAtleti_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDeloSSeznami/TekmovanjeZNajvecAtletiResponse" message="tns:IDeloSSeznami_TekmovanjeZNajvecAtleti_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NajstarejsiAtlet">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDeloSSeznami/NajstarejsiAtlet" message="tns:IDeloSSeznami_NajstarejsiAtlet_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDeloSSeznami/NajstarejsiAtletResponse" message="tns:IDeloSSeznami_NajstarejsiAtlet_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PovprecnaStarostAtleta">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDeloSSeznami/PovprecnaStarostAtleta" message="tns:IDeloSSeznami_PovprecnaStarostAtleta_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDeloSSeznami/PovprecnaStarostAtletaResponse" message="tns:IDeloSSeznami_PovprecnaStarostAtleta_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VsiAtleti">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDeloSSeznami/VsiAtleti" message="tns:IDeloSSeznami_VsiAtleti_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDeloSSeznami/VsiAtletiResponse" message="tns:IDeloSSeznami_VsiAtleti_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VsaTekmovanja">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDeloSSeznami/VsaTekmovanja" message="tns:IDeloSSeznami_VsaTekmovanja_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDeloSSeznami/VsaTekmovanjaResponse" message="tns:IDeloSSeznami_VsaTekmovanja_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DodajAtleta">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDeloSSeznami/DodajAtleta" message="tns:IDeloSSeznami_DodajAtleta_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDeloSSeznami/DodajAtletaResponse" message="tns:IDeloSSeznami_DodajAtleta_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VrniAtlete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDeloSSeznami/VrniAtlete" message="tns:IDeloSSeznami_VrniAtlete_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDeloSSeznami/VrniAtleteResponse" message="tns:IDeloSSeznami_VrniAtlete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Uredi">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDeloSSeznami/Uredi" message="tns:IDeloSSeznami_Uredi_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDeloSSeznami/UrediResponse" message="tns:IDeloSSeznami_Uredi_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IDeloSSeznami" type="tns:IDeloSSeznami">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="UstvariUporabnika">
+      <soap:operation soapAction="http://tempuri.org/IDeloSSeznami/UstvariUporabnika" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UstvariAtleta">
+      <soap:operation soapAction="http://tempuri.org/IDeloSSeznami/UstvariAtleta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UstvariTekmovanje">
+      <soap:operation soapAction="http://tempuri.org/IDeloSSeznami/UstvariTekmovanje" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UstvariTekmovanjeAtlet">
+      <soap:operation soapAction="http://tempuri.org/IDeloSSeznami/UstvariTekmovanjeAtlet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VpisUporabnika">
+      <soap:operation soapAction="http://tempuri.org/IDeloSSeznami/VpisUporabnika" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VsiAtletiNaTekmovanju">
+      <soap:operation soapAction="http://tempuri.org/IDeloSSeznami/VsiAtletiNaTekmovanju" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VsaTekmovanjaNaKaterihNastopAtlet">
+      <soap:operation soapAction="http://tempuri.org/IDeloSSeznami/VsaTekmovanjaNaKaterihNastopAtlet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PodrobnostiAtleta">
+      <soap:operation soapAction="http://tempuri.org/IDeloSSeznami/PodrobnostiAtleta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TekmovanjeZNajvecAtleti">
+      <soap:operation soapAction="http://tempuri.org/IDeloSSeznami/TekmovanjeZNajvecAtleti" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NajstarejsiAtlet">
+      <soap:operation soapAction="http://tempuri.org/IDeloSSeznami/NajstarejsiAtlet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PovprecnaStarostAtleta">
+      <soap:operation soapAction="http://tempuri.org/IDeloSSeznami/PovprecnaStarostAtleta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VsiAtleti">
+      <soap:operation soapAction="http://tempuri.org/IDeloSSeznami/VsiAtleti" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VsaTekmovanja">
+      <soap:operation soapAction="http://tempuri.org/IDeloSSeznami/VsaTekmovanja" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DodajAtleta">
+      <soap:operation soapAction="http://tempuri.org/IDeloSSeznami/DodajAtleta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VrniAtlete">
+      <soap:operation soapAction="http://tempuri.org/IDeloSSeznami/VrniAtlete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Uredi">
+      <soap:operation soapAction="http://tempuri.org/IDeloSSeznami/Uredi" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service1">
+    <wsdl:port name="BasicHttpBinding_IDeloSSeznami" binding="tns:BasicHttpBinding_IDeloSSeznami">
+      <soap:address location="http://localhost:63562/Service1.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
