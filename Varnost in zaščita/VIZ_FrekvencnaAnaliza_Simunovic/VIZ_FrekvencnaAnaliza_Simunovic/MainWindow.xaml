@@ -1,0 +1,62 @@
+﻿<Window x:Class="VIZ_FrekvencnaAnaliza_Simunovic.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:oxy="http://oxyplot.org/wpf"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VIZ_FrekvencnaAnaliza_Simunovic"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" Background="LightGray" Height="40" VerticalAlignment="Top" Padding="5" BorderBrush="Gray">
+            <MenuItem Header="Datoteka">
+                <MenuItem Header="Dodaj analitično datoteko" Name="AddAnalitic" Click="AddAnalitic_Click"/>
+                <MenuItem Header="Dodaj šifrirano datoteko" Name="AddCipher" Click="AddCipher_Click"/>
+                <MenuItem Header="Shrani dešifrirano datoteko" Name="Save" Click="Save_Click" IsEnabled="False"/>
+                <MenuItem Header="Počisti analitiko" Name="ClearAnalitics" Click="ClearAnalitics_Click" IsEnabled="False"/>
+            </MenuItem>
+
+            <TextBox Background="white" Width="25" Name="FromChar" TextAlignment="Center" IsEnabled="False" MaxLength="1"></TextBox>
+            <Label Content="=>"></Label>
+            <TextBox Background="white" Width="25" Name="ToChar" TextAlignment="Center" IsEnabled="False" MaxLength="1"></TextBox>
+            <Button Content="Spremeni" Name="ChangeChar" Width="75" Background="White" IsEnabled="False" Click="ChangeChar_Click"/>
+        </Menu>
+
+        <TabControl>
+            <TabItem Header="Text" Width="70">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="60"/>
+                    </Grid.RowDefinitions>
+                    <ScrollViewer Margin="10">
+                        <TextBox IsReadOnly="True" Name="OriginalText" Text="Original" TextWrapping="Wrap" />
+                    </ScrollViewer>
+                    <ScrollViewer Margin="10" Grid.Column="1">
+                        <TextBox IsReadOnly="True" Name="DecipherdText" Text="Dešifrirano" TextWrapping="Wrap" />
+                    </ScrollViewer>
+                    <Button Grid.Row="1" IsEnabled="False" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="5"  Height="50" Width="150" Content="Dešifriraj" Name="DeCipher" Click="DeCipher_Click" Grid.Column="1"></Button>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Grafi" Name="Charts" Width="70" IsEnabled="False">
+                <Grid>
+                    <TabControl>
+                        <TabItem Header="Šifrirano besedilo">
+                            <oxy:PlotView Name="ChChars" Margin="10"/>
+                        </TabItem>
+                        <TabItem Header="Analitično besedilo">
+                            <oxy:PlotView Name="AnalChChars" Margin="10"/>
+                        </TabItem>
+                        <TabItem Header="Dešifrirano besedilo">
+                            <oxy:PlotView Name="DeChChars" Margin="10"/>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>

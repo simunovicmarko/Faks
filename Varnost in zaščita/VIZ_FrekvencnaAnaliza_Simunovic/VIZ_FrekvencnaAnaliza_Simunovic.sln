@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31025.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VIZ_FrekvencnaAnaliza_Simunovic", "VIZ_FrekvencnaAnaliza_Simunovic\VIZ_FrekvencnaAnaliza_Simunovic.csproj", "{10E9281F-45E1-435B-BF7D-9A0D0B182D51}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{10E9281F-45E1-435B-BF7D-9A0D0B182D51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10E9281F-45E1-435B-BF7D-9A0D0B182D51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10E9281F-45E1-435B-BF7D-9A0D0B182D51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10E9281F-45E1-435B-BF7D-9A0D0B182D51}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5DBD16A2-F723-4628-B4A8-6C605F11560B}
+	EndGlobalSection
+EndGlobal
