@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Registracija";
+}
+
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+    });
+</script>
+
+<div class="d-flex flex-column align-items-center">
+    @using (Html.BeginForm("VpisVpisnihPodatkov", "Registration"))
+    {
+        <fieldset class="d-flex flex-column">
+            @Html.Label("E-poša", "Eposta")
+            @Html.TextBox("Eposta")
+            @Html.Label("Geslo")
+            @Html.Password("Geslo")
+            @Html.Label("Geslo1","Ponovno vpišite geslo")
+            @Html.Password("Geslo1")
+            
+
+        </fieldset>
+        <input type="submit" value="Naprej" />
+    }
+</div>

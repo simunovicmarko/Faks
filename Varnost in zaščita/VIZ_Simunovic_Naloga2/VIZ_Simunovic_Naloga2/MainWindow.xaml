@@ -1,0 +1,102 @@
+﻿<Window x:Class="VIZ_Simunovic_Naloga2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VIZ_Simunovic_Naloga2"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" Background="LightGray" Height="40" VerticalAlignment="Top" Padding="10" BorderBrush="Gray">
+            <MenuItem Header="Datoteka">
+                <MenuItem Header="Dodaj datoteko" Name="AddFile" Click="AddFile_Click"/>
+            </MenuItem>
+            <MenuItem Header="Ključ">
+                <MenuItem Header="Dodaj AES ključ" Name="AddAESKey" Click="AddAESKey_Click"/>
+                <MenuItem Header="Dodaj RSA ključ" Name="AddRSAKey" Click="AddRSAKey_Click"/>
+                <MenuItem Header="Shrani ključ" Name="SaveKeyBtn" Click="SaveKeyBtn_Click"/>
+            </MenuItem>
+            <!--<TextBox Background="white" Width="25" Name="FromChar" TextAlignment="Center" IsEnabled="False" MaxLength="1"></TextBox>
+            <Label Content="=>"></Label>
+            <TextBox Background="white" Width="25" Name="ToChar" TextAlignment="Center" IsEnabled="False" MaxLength="1"></TextBox>
+            <Button Content="Spremeni" Name="ChangeChar" Width="75" Background="White" IsEnabled="False" Click="ChangeChar_Click"/>-->
+        </Menu>
+
+        <TabControl>
+            <TabItem Header="Enkripcija">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="85*"/>
+                        <ColumnDefinition Width="709*"/>
+                    </Grid.ColumnDefinitions>
+                    <ComboBox  Width="100" Height="40" Name="KeyLengthCB" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="45,15,0,0"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Column="1" >
+                        <!--<ComboBoxItem Content="128" IsSelected="True"/>
+                <ComboBoxItem Content="192"/>
+                <ComboBoxItem Content="256"/>-->
+                    </ComboBox>
+
+                    <ComboBox  Width="100" Height="40" Name="EncryptionTypteCB" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="15,15,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.ColumnSpan="2">
+                        <!--<ComboBoxItem Content="128" IsSelected="True"/>-->
+                        <ComboBoxItem Content="AES" Name="AESItem" IsSelected="True" Selected="AESItem_Selected"/>
+                        <ComboBoxItem Content="RSA" Name="RSAItem" Selected="RSAItem_Selected"/>
+                    </ComboBox>
+                    <Label Name="keyAdded" Width="150" Height="40" Content="Dodan ključ: x" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,15,15,0" TextBlock.TextAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Column="1"/>
+
+                    <Button Content="Dešifriraj" Name="Decipher" Width="100" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,15,15" IsEnabled="False" Click="Decipher_Click" Grid.Column="1"/>
+                    <Button Content="Šifriraj" Name="Cipher" Width="100" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,130,15" Click="Cipher_Click" IsEnabled="False" Grid.Column="1"/>
+                    <Label Name="EncKey" Width="200" Height="40" Margin="212,15,297,0" VerticalAlignment="Top" Grid.Column="1"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Zgoščevalne funkcije" IsSelected="True">
+                <Grid>
+                    <!--<Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="52*"/>
+                        <ColumnDefinition Width="345*"/>
+                    </Grid.ColumnDefinitions>-->
+
+                    <ComboBox  Width="100" Height="40" Name="HashTypteCB" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="15,15,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="HashTypteCB_SelectionChanged" Grid.ColumnSpan="2">
+                        <!--<ComboBoxItem Content="128" IsSelected="True"/>-->
+                        <ComboBoxItem Content="MD5" Name="MD5Item" IsSelected="True"/>
+                        <ComboBoxItem Content="SHA-1" Name="SHA1Item"/>
+                        <ComboBoxItem Content="SHA-256" Name="SHA256Item"/>
+                        <ComboBoxItem Content="bCrypt" Name="bCryptItem"/>
+                    </ComboBox>
+
+                    <TextBox x:Name="UserNameTB" Width="150" Height="40" Margin="274,15,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
+                    <Label Content="Uporabniško ime:" Name="UsernameLabel" Margin="159,15,0,0" Width="110" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
+
+                    <PasswordBox  x:Name="PasswordTB" Width="150" Height="40" Margin="509,15,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
+                    <Label Content="Geslo:" x:Name="PasswordLabel" Margin="459,15,0,0" Width="50" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
+                    
+                    <TextBox x:Name="IterationsInt" Width="70" Height="40" Margin="100 70 50 15" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Hidden" Text="10"/>
+                    <Label Content="Število iteracij:" Name="IterationLabel" Margin="15 70 15 15" Width="96" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Visibility="Hidden"/>
+
+                    <Button Content="Zgosti" Name="HashButton" Width="130" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,15,15" IsEnabled="False" Click="HashButton_Click" Grid.Column="1"/>
+                    <Button Content="Preveri uporabnika" 
+                            Name="CheckPasswordButton"
+                            Width="130" Height="40"
+                            VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                            Margin="0,0,15,70" IsEnabled="True"
+                            Click="CheckPasswordButton_Click" />
+                    <Button Content="Dodaj uporabnika"
+                            Name="AddUserButton"
+                            Width="130" Height="40" 
+                            VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                            Margin="0,0,15,124" IsEnabled="True"
+                            Click="AddUserButton_Click"/>
+
+                    <TextBox x:Name="HashedValueTB" Text="Zgoščena vrednost: "
+                             Width="400" Height="200"
+                             HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                             VerticalContentAlignment="Top"
+                             HorizontalContentAlignment="Center"
+                             Margin="15" FontSize="18" TextWrapping="Wrap"
+                             IsReadOnly="True"
+                             BorderThickness="0"/>
+                    
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>

@@ -37,14 +37,11 @@ namespace VIZ_FrekvencnaAnaliza_Simunovic
         //    }
         //}
 
-        //private void SortByValue(ref Dictionary<char, int> dick)
-        //{
-        //    Dictionary<char, int> tempDick = new Dictionary<char, int>();
-        //    foreach (var item in dick.OrderBy(x => x.Value))
-        //        tempDick.Add(item.Key, item.Value);
-        //    dick = tempDick;
-        //}
-
+       
+        /// <summary>
+        /// Returns the string from a txt file. If it doesn't it returns null
+        /// </summary>
+        /// <returns></returns>
         private string AddAndReadTxtFile()
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -102,20 +99,20 @@ namespace VIZ_FrekvencnaAnaliza_Simunovic
         /// <summary>
         /// Goes through the entire text and changes charecters to their coresponding values in Change() dictionary
         /// </summary>
-        /// <param name="s"></param>
+        /// <param name="input"></param>
         /// <returns></returns>
-        private string Decipher(string s)
+        private string Decipher(string input)
         {
             Dictionary<char, char> dick = Change();
             //string returnString = "";
-            StringBuilder temp = new StringBuilder(s);
+            StringBuilder temp = new StringBuilder(input);
 
             //For every letter set its value to the value from the orderd dictionary 
-            for (int i = 0; i < s.Length; i++)
+            for (int i = 0; i < input.Length; i++)
             {
-                if (char.IsLetter(s[i]))
+                if (char.IsLetter(input[i]))
                 {
-                    temp[i] = dick[char.ToUpper(s[i])];
+                    temp[i] = dick[char.ToUpper(input[i])];
                 }
             }
 
@@ -136,6 +133,12 @@ namespace VIZ_FrekvencnaAnaliza_Simunovic
             return temp.ToString();
         }
 
+        /// <summary>
+        /// Switches the characters
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
         private void SwitchChars(ref string input, char from, char to)
         {
             StringBuilder stringBuilder = new StringBuilder(input);
@@ -151,6 +154,13 @@ namespace VIZ_FrekvencnaAnaliza_Simunovic
             input = stringBuilder.ToString();
         }
 
+
+        /// <summary>
+        /// Creates a pie chart
+        /// </summary>
+        /// <param name="dick"></param>
+        /// <param name="pv"></param>
+        /// <param name="title"></param>
         private void CreateChart(Dictionary<char, int> dick, OxyPlot.Wpf.PlotView pv, string title = "Črke")
         {
             PlotModel pm = new PlotModel();

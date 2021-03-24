@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "Registracija";
+}
+
+<style>
+    #custom-handle {
+        width: 3em;
+        height: 1.6em;
+        top: 50%;
+        margin-top: -.8em;
+        text-align: center;
+        line-height: 1.6em;
+    }
+
+    #sslider {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+</style>
+
+<script>
+    $(function () {
+        var handle = $("#custom-handle");
+        $("#slider").slider({
+            create: function () {
+                $("#slider").slider("option", "min", 1000);
+                $("#slider").slider("option", "max", 9265);
+                handle.text($(this).slider("value"));
+            },
+            slide: function (event, ui) {
+                handle.text(ui.value);
+                document.getElementById("PostnaStevilka").value = ui.value;
+            }
+        });
+    });
+
+
+</script>
+
+<div class="d-flex flex-column align-items-center">
+    @using (Html.BeginForm("VpisNaslova", "Registration"))
+    {
+        <fieldset class="d-flex flex-column">
+            @Html.Label("Naslov")
+            @Html.TextBox("Naslov")
+            @Html.Hidden("PostnaStevilka")
+            <div id="sslider">
+                @Html.Label("Poštna številka")
+                <div id="slider">
+                    <div id="custom-handle" class="ui-slider-handle"></div>
+                </div>
+            </div>
+
+            @Html.Label("Drzava", "Država")
+            @Html.TextBox("Drzava")
+
+        </fieldset>
+        <input type="submit" value="Naprej" />
+    }
+
+
+</div>
