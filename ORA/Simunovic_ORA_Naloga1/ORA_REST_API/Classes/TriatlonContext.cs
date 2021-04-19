@@ -4,22 +4,33 @@
 namespace ORA_REST_API
 {
     //[DataContract]
-    public class TriatlonContext : DbContext
+    public sealed class TriatlonContext : DbContext
     {
-
-        public TriatlonContext() : base("Triatlon")
+        private static TriatlonContext instance = null;
+        private static readonly object padlock = new object();
+        private TriatlonContext() : base("Triatlon")
         {
             //Database.SetInitializer<TriatlonContext>(new BazaInitializier());
         }
 
-        public TriatlonContext(string connectionString) : base(connectionString)
+        public static TriatlonContext Instance
         {
-            Database.SetInitializer<TriatlonContext>(new BazaInitializier());
+            get
+            {
+                if (instance != null) return instance;
+                lock (padlock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new TriatlonContext();
+                    }
+                    return instance;
+                }
+            }
         }
-
         public DbSet<Results> Results { get; set; }
-        public DbSet<Competition> competitions { get; set; }
-        public DbSet<User> users { get; set; }
+        public DbSet<Competition> Competitions { get; set; }
+        public DbSet<User> Users { get; set; }
 
     }
 

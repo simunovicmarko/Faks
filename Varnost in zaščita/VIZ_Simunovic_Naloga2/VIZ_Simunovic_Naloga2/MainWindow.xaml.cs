@@ -14,9 +14,10 @@ using Org.BouncyCastle.Crypto.Encodings;
 using Org.BouncyCastle.OpenSsl;
 using BCrypt.Net;
 //using Microsoft.EntityFrameworkCore;
-using System.Data.Entity;
 using System.Linq;
 using System.Data.Entity.Infrastructure;
+using Org.BouncyCastle.Asn1.Pkcs;
+using System.Security.Cryptography.X509Certificates;
 
 namespace VIZ_Simunovic_Naloga2
 {
@@ -30,6 +31,7 @@ namespace VIZ_Simunovic_Naloga2
         byte[] globalEncrypted;
         //bool TrueIfAESElseRSA;
         RsaKeyParameters privateKey;
+        RsaKeyParameters publicKey;
 
         List<string> AEScomboBoxItems = new List<string>() { "128", "192", "256" };
         List<string> RSAcomboBoxItems = new List<string>() { "1024", "2048" };
@@ -52,14 +54,10 @@ namespace VIZ_Simunovic_Naloga2
         {
 
             byte[] inputBytes = Encoding.UTF8.GetBytes(input);
-
-            RsaKeyPairGenerator rsaKeyPairGenerator = new RsaKeyPairGenerator();
-            rsaKeyPairGenerator.Init(new KeyGenerationParameters(new SecureRandom(), int.Parse(KeyLengthCB.Text)));
-            AsymmetricCipherKeyPair keyPair = rsaKeyPairGenerator.GenerateKeyPair();
-
-            RsaKeyParameters privateKey = (RsaKeyParameters)keyPair.Private;
-            RsaKeyParameters publicKey = (RsaKeyParameters)keyPair.Public;
+            RsaKeyParameters privateKey, publicKey;
+            GenerateRSAKey(out privateKey, out publicKey);
             this.privateKey = privateKey;
+            this.publicKey = publicKey;
 
             IAsymmetricBlockCipher cipher = new OaepEncoding(new RsaEngine());
             cipher.Init(true, publicKey);
@@ -71,6 +69,25 @@ namespace VIZ_Simunovic_Naloga2
             SaveRSAKey();
             return cipherText;
 
+        }
+
+        private void GenerateRSAKey(out RsaKeyParameters privateKey, out RsaKeyParameters publicKey)
+        {
+            RsaKeyPairGenerator rsaKeyPairGenerator = new RsaKeyPairGenerator();
+            rsaKeyPairGenerator.Init(new KeyGenerationParameters(new SecureRandom(), int.Parse(KeyLengthCB.Text)));
+            AsymmetricCipherKeyPair keyPair = rsaKeyPairGenerator.GenerateKeyPair();
+
+            privateKey = (RsaKeyParameters)keyPair.Private;
+            publicKey = (RsaKeyParameters)keyPair.Public;
+        }
+        private void GenerateRSAKey(int length = 1024)
+        {
+            RsaKeyPairGenerator rsaKeyPairGenerator = new RsaKeyPairGenerator();
+            rsaKeyPairGenerator.Init(new KeyGenerationParameters(new SecureRandom(), length));
+            AsymmetricCipherKeyPair keyPair = rsaKeyPairGenerator.GenerateKeyPair();
+
+            privateKey = (RsaKeyParameters)keyPair.Private;
+            publicKey = (RsaKeyParameters)keyPair.Public;
         }
 
         private string RSADecrypt(byte[] input, RsaKeyParameters privateKey)
@@ -121,6 +138,23 @@ namespace VIZ_Simunovic_Naloga2
                 }
             }
         }
+        private void SavePublicRSAKey()
+        {
+            TextWriter textWriter = new StringWriter();
+            PemWriter pemWriter = new PemWriter(textWriter);
+
+            pemWriter.WriteObject(publicKey);
+            string s = textWriter.ToString();
+
+            SaveFileDialog sfd = new SaveFileDialog();
+            if (sfd.ShowDialog() == true)
+            {
+                using (StreamWriter sw = new StreamWriter(sfd.FileName))
+                {
+                    sw.Write(s);
+                }
+            }
+        }
 
         private RsaKeyParameters GetRSAKeyFromString(string input)
         {
@@ -131,6 +165,16 @@ namespace VIZ_Simunovic_Naloga2
             this.privateKey = (RsaKeyParameters)pkp.Private;
             return (RsaKeyParameters)pkp.Private;
         }
+        private RsaKeyParameters GetPublicRSAKeyFromString(string input)
+        {
+            TextReader textReader = new StringReader(input);
+            PemReader pemReader = new PemReader(textReader);
+            object o = pemReader.ReadObject();
+            //AsymmetricCipherKeyPair pkp = (AsymmetricCipherKeyPair)o;
+            this.publicKey = (RsaKeyParameters)o;
+            return (RsaKeyParameters)o;
+        }
+
         private void GetAESKeyFromString(string input)
         {
 
@@ -318,7 +362,8 @@ namespace VIZ_Simunovic_Naloga2
             Cipher.IsEnabled = true;
             Decipher.IsEnabled = true;
             HashButton.IsEnabled = true;
-
+            SignBtn.IsEnabled = true;
+            CheckSignBtn.IsEnabled = true;
         }
 
 
@@ -389,6 +434,12 @@ namespace VIZ_Simunovic_Naloga2
             else
                 SaveRSAKey();
         }
+        private void SavePublicKeyBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SavePublicRSAKey();
+        }
+
+
 
         private void AddRSAKey_Click(object sender, RoutedEventArgs e)
         {
@@ -789,29 +840,210 @@ namespace VIZ_Simunovic_Naloga2
 
             return salt;
         }
-    }
 
 
 
-    public class UserContext : DbContext
-    {
-        public UserContext() : base("Users")
+        /////////////////////////////////////////////////////////////////////////////////////////////
+        byte[] signed;
+        byte[] unsigned;
+        X509Certificate2 certificate;
+        private byte[] SignWithRSA(int keyLength = 1024)
         {
-            Database.SetInitializer<UserContext>(new BazaInitializier());
+            byte[] arr = GetAllBytesFromGlobalFilePath();
+            GenerateRSAKey(keyLength);
+            ISigner signer = SignerUtilities.GetSigner(PkcsObjectIdentifiers.Sha1WithRsaEncryption.Id);
+            signer.Init(true, privateKey);
+            signer.BlockUpdate(arr, 0, arr.Length);
+            byte[] signature = signer.GenerateSignature();
+            return signature;
+        }
+        private bool VerifySignatureRSA(byte[] signiture, byte[] file)
+        {
+            //byte[] arr = File.ReadAllBytes(globalFilePath);
+            ISigner signer = SignerUtilities.GetSigner(PkcsObjectIdentifiers.Sha1WithRsaEncryption.Id);
+            signer.Init(false, publicKey);
+            signer.BlockUpdate(file, 0, file.Length);
+            bool valid = signer.VerifySignature(signiture);
+            return valid;
         }
 
-        public DbSet<User> Users { get; set; }
-
-    }
-
-
-
-
-    public class BazaInitializier : DropCreateDatabaseIfModelChanges<UserContext>
-    {
-        protected override void Seed(UserContext context)
+        private void SignitureType_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            base.Seed(context);
+            if (KeyLength != null)
+            {
+                if (SignitureType.SelectedIndex == 0)
+                {
+                    KeyLength.IsEnabled = true;
+                    KeyLength.Visibility = Visibility.Visible;
+
+                }
+                else
+                {
+                    KeyLength.IsEnabled = false;
+                    KeyLength.Visibility = Visibility.Hidden;
+                }
+            }
+        }
+
+        private void SignBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (SignitureType.Text == "RSA")
+                {
+                    signed = SignWithRSA();
+                }
+                else
+                    signed = SignWithCertificate();
+                SaveSignedBtn_Click(sender, e);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+
+
+        private void CheckSignBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                byte[] check = File.ReadAllBytes(globalFilePath);
+                bool legit = false;
+                if (SignitureType.SelectedIndex == 0)
+                {
+                    legit = VerifySignatureRSA(unsigned, check);
+                }
+                else
+                    legit = CheckWithCertificate(unsigned);
+                if (legit)
+                {
+                    MessageBox.Show("Uspešno");
+                }
+                else
+                    MessageBox.Show("Ni uspelo");
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void SaveSignedBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            if (sfd.ShowDialog() == true)
+            {
+                File.WriteAllBytes(sfd.FileName, signed);
+            }
+        }
+
+        private void AddPublicRSAKey_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            //ofd.Filter = "|*.rsaKey";
+            if (ofd.ShowDialog() == true)
+            {
+
+                try
+                {
+                    string keyString = GetStringFromPath(ofd.FileName);
+                    this.publicKey = GetPublicRSAKeyFromString(keyString);
+                    if (globalFilePath != null && globalFilePath.Length > 0)
+                    {
+                        CheckSignBtn.IsEnabled = true;
+                    }
+
+                    //keyAdded.Content = "Dodan ključ: RSA";
+                }
+                catch (Exception exception)
+                {
+
+                    MessageBox.Show("Uvoz ključa ni uspel\n\nPodrobnosti:\n" + exception.Message);
+                }
+            }
+        }
+
+
+        private void AddSignedFile_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            if (ofd.ShowDialog() == true)
+            {
+                unsigned = File.ReadAllBytes(ofd.FileName);
+                CheckSignBtn.IsEnabled = true;
+            }
+        }
+
+        private void AddCertificate_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            if (ofd.ShowDialog() == true)
+            {
+                string password = PasswordTB2.Password;
+                try
+                {
+                    certificate = new X509Certificate2(ofd.FileName, password);
+
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Poskusite ponovno");
+                }
+            }
+        }
+
+        private byte[] SignWithCertificate()
+        {
+
+            RSA rsa = (RSA)certificate.PrivateKey;
+            //var temp = neki as RSACryptoServiceProvider;
+            (certificate.PrivateKey as RSACng).Key.SetProperty(
+                new CngProperty(
+                    "Export Policy",
+                    BitConverter.GetBytes((int)CngExportPolicies.AllowPlaintextExport),
+                    CngPropertyOptions.Persist));
+
+            RSAParameters RSAParameters = rsa.ExportParameters(true);
+
+            AsymmetricCipherKeyPair keypair = DotNetUtilities.GetRsaKeyPair(RSAParameters);
+
+
+            byte[] arr = GetAllBytesFromGlobalFilePath();
+            ISigner signer = SignerUtilities.GetSigner(PkcsObjectIdentifiers.Sha1WithRsaEncryption.Id);
+            signer.Init(true, keypair.Private);
+            signer.BlockUpdate(arr, 0, arr.Length);
+            byte[] signature = signer.GenerateSignature();
+            return signature;
+
+        }
+
+
+        private bool CheckWithCertificate(byte[] signed)
+        {
+
+            RSA rsa = (RSA)certificate.PublicKey.Key;
+
+            (certificate.PublicKey.Key as RSACng).Key.SetProperty(
+                new CngProperty(
+                    "Export Policy",
+                    BitConverter.GetBytes((int)CngExportPolicies.AllowPlaintextExport),
+                    CngPropertyOptions.Persist));
+
+            RSAParameters RSAParameters = rsa.ExportParameters(false);
+
+            RsaKeyParameters publicKey = DotNetUtilities.GetRsaPublicKey(RSAParameters);
+
+            var file = GetAllBytesFromGlobalFilePath();
+            ISigner signer = SignerUtilities.GetSigner(PkcsObjectIdentifiers.Sha1WithRsaEncryption.Id);
+            signer.Init(false, publicKey);
+            signer.BlockUpdate(file, 0, file.Length);
+            bool valid = signer.VerifySignature(signed);
+            return valid;
         }
     }
 }

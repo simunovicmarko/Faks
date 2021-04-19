@@ -65,6 +65,8 @@ namespace SO_Simunovic_Naloga1
 
             Output(matrix, alternatives);
             Visualise(matrix, alternatives);
+
+            Console.ReadKey();
         }
 
         static void Visualise(int[,] matrix, List<string> alts)
@@ -192,6 +194,7 @@ namespace SO_Simunovic_Naloga1
             for (int i = 0; i < matrix.GetLength(0); i++)
             {
                 int maxInRow = int.MinValue;
+                //Find max value in row
                 for (int j = 0; j < matrix.GetLength(1); j++)
                 {
                     if (matrix[i, j] > maxInRow)
@@ -200,6 +203,7 @@ namespace SO_Simunovic_Naloga1
                     }
                 }
                 double res = 0;
+                //If element is the same as max in row calculate it time the h. Else calculate it time 1 - h
                 for (int j = 0; j < matrix.GetLength(1); j++)
                 {
                     if (matrix[i, j] != maxInRow)
@@ -473,22 +477,6 @@ namespace SO_Simunovic_Naloga1
             }
             return matrix;
         }
-
-        //static int[,] TransponeMatrix(int[,] matrix)
-        //{
-        //    int w = matrix.GetLength(0);
-        //    int h = matrix.GetLength(1);
-
-        //    int[,] result = new int[h, w];
-
-        //    for (int i = 0; i < w; i++)
-        //    {
-        //        for (int j = 0; j < h; j++)
-        //            result[j, i] = matrix[i, j];
-        //    }
-
-        //    return result;
-        //}
 
         static T[,] TransponeMatrix<T>(T[,] matrix)
         {

@@ -1,0 +1,11 @@
+﻿@model Tekmovanje
+
+<div class="container d-flex flex-column align-content-center justify-content-center">
+
+    @using (Html.BeginForm("Dodajanje", "Tekmovanje"))
+    {
+        @Html.EditorForModel()
+        <input type="submit" value="Naprej" />
+    }
+
+</div>

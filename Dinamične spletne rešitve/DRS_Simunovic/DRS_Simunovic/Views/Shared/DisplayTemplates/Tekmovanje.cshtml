@@ -1,0 +1,20 @@
+﻿@model Tekmovanje
+
+<div class="w-100 d-flex justify-content-between align-content-end bg-light mb-1">
+    <p>Ime: @Model.Name</p>
+    <p>Prizorišče: @Model.venue</p>
+    <p>Datum dogodka: @Model.date.Date.ToShortDateString()</p>
+
+   
+
+    <div>
+        <button class="btn-dark border-0 p-2">
+            @*Uredi*@
+            @Html.ActionLink("Uredi", "Uredi", "Tekmovanje", @Model, new { @class = "text-white" })
+        </button>
+        <button class="btn-danger border-0 p-2">
+            @*Uredi*@
+            @Html.ActionLink("Izbrisi", "Izbrisi", "Tekmovanje", @Model, new { @class = "text-white" })
+        </button>
+    </div>
+</div>

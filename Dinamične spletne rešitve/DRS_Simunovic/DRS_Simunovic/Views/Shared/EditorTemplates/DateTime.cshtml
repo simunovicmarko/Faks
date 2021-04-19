@@ -1,0 +1,5 @@
+﻿@model DateTime
+@{string datum = $"{Model.Date.Year}-{Model.Date.Month}-{Model.Date.Day}"; }
+<div>
+    @Html.TextBoxFor(x => x, new { type = "date"})
+</div>

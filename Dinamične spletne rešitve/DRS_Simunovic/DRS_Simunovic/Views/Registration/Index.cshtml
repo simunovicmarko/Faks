@@ -1,31 +1,174 @@
 ﻿@{
     ViewData["Title"] = "Registracija";
 }
+@model Uporabnik
 
 <script>
     $(function () {
         $("#datepicker").datepicker();
     });
+
+
+    $(function () {
+        $("#tabs").tabs();
+    });
 </script>
 
 <div class="d-flex flex-column align-items-center">
-    @using (Html.BeginForm("VpisOsnovnihPodatkov", "Registration"))
+    @using (Html.BeginForm("Index", "Registration"))
     {
-        <fieldset class="d-flex flex-column">
-            @Html.Label("Ime")
-            @Html.TextBox("Ime")
-            @Html.Label("Priimek")
-            @Html.TextBox("Priimek")
-            @Html.Label("EMŠO")
-            @Html.TextBox("EMŠO")
-            
-            <p >Datum rojstva:<br> <input type="text" id="datepicker" name="DatumRojstva"></p>
-        </fieldset>
+        @Html.EditorForModel()
         <input type="submit" value="Naprej" />
     }
-
-    @*<form>
-        <label for="Ime">Ime</label>
-        <label for="Ime">Ime</label>
-    </form>*@
 </div>
+
+
+@*@Html.ValidationSummary(true)
+    <fieldset class="d-flex flex-column">
+        <div id="tabs">
+            <ul>
+                <li><a href="#tabs-1">Osebni podatki - Zelo</a></li>
+                <li><a href="#tabs-2">Drugi podatki - Sovražim</a></li>
+                <li><a href="#tabs-3">Geslo - JQuery</a></li>
+            </ul>
+            <div id="tabs-1">
+                <div>
+                    @Html.ValidationMessageFor(uporabnik => uporabnik.Ime)
+                    @Html.Label("Ime")
+                    @Html.TextBox("Ime")
+                </div>
+
+                <div>
+                    @Html.ValidationMessageFor(uporabnik => uporabnik.Priimek)
+                    @Html.Label("Priimek")
+                    @Html.TextBox("Priimek")
+                </div>
+
+                <div>
+                    @Html.ValidationMessageFor(uporabnik => uporabnik.KrajRojstva)
+                    @Html.LabelFor(uporabnik => uporabnik.KrajRojstva)
+                    @Html.DropDownListFor(uporabnik => uporabnik.KrajRojstva, Uporabnik.GetKraji())
+                </div>
+                <div>
+                    @Html.ValidationMessageFor(uporabnik => uporabnik.DatumRojstva)
+                    @Html.Label("DatumRojstva", "Datum rojstva")
+                    @Html.Editor("DatumRojstva", new { htmlAttributes = new { @class = "datepicker", @Type = "date" } })
+                </div>
+            </div>
+            <div id="tabs-2">
+                <div>
+                    @Html.ValidationMessageFor(uporabnik => uporabnik.EMŠO)
+                    @Html.Label("EMŠO")
+                    @Html.TextBox("EMŠO")
+                </div>
+                <div>
+                    @Html.ValidationMessageFor(uporabnik => uporabnik.Eposta)
+                    @Html.Label("Eposta")
+                    @Html.TextBox("Eposta")
+                </div>
+            </div>
+            <div id="tabs-3">
+                <div>
+                    @Html.ValidationMessageFor(uporabnik => uporabnik.Geslo)
+                    @Html.Label("Geslo")
+                    @Html.TextBox("Geslo")
+                </div>
+                <div>
+                    @Html.ValidationMessageFor(uporabnik => uporabnik.Geslo1)
+                    @Html.Label("Geslo1", "Ponovno vnesite geslo")
+                    @Html.TextBox("Geslo1")
+                </div>
+            </div>
+        </div>
+    </fieldset>*@
+
+
+@*@{
+        ViewData["Title"] = "Registracija";
+    }
+    @model Uporabnik
+
+    <script>
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+
+
+        $(function () {
+            $("#tabs").tabs();
+        });
+    </script>
+
+    <div class="d-flex flex-column align-items-center">
+        @using (Html.BeginForm("Index", "Registration"))
+        {
+            @Html.EditorForModel()
+            @Html.EditorFor(x => x.KrajRojstva)
+
+
+
+            @Html.ValidationSummary(true)
+            <fieldset class="d-flex flex-column">
+                <div id="tabs">
+                    <ul>
+                        <li><a href="#tabs-1">Osebni podatki - Zelo</a></li>
+                        <li><a href="#tabs-2">Drugi podatki - Sovražim</a></li>
+                        <li><a href="#tabs-3">Geslo - JQuery</a></li>
+                    </ul>
+                    <div id="tabs-1">
+                        <div>
+                            @Html.ValidationMessageFor(uporabnik => uporabnik.Ime)
+                            @Html.Label("Ime")
+                            @Html.EditorFor(x => x.Ime)
+
+                        </div>
+
+                        <div>
+                            @Html.ValidationMessageFor(uporabnik => uporabnik.Priimek)
+                            @Html.Label("Priimek")
+                            @Html.EditorFor(x => x.Priimek)
+                        </div>
+
+                        <div>
+                            @Html.ValidationMessageFor(uporabnik => uporabnik.KrajRojstva)
+                            @Html.LabelFor(uporabnik => uporabnik.KrajRojstva)
+                            @Html.DropDownListFor(uporabnik => uporabnik.KrajRojstva, Uporabnik.GetKraji())
+                        </div>
+                        <div>
+                            @Html.ValidationMessageFor(uporabnik => uporabnik.DatumRojstva)
+                            @Html.Label("DatumRojstva", "Datum rojstva")
+                            @Html.EditorFor(x => x.DatumRojstva)
+                        </div>
+                    </div>
+                    <div id="tabs-2">
+                        <div>
+                            @Html.ValidationMessageFor(uporabnik => uporabnik.EMŠO)
+                            @Html.Label("EMŠO")
+                            @Html.EditorFor(x => x.EMŠO)
+
+                        </div>
+                        <div>
+                            @Html.ValidationMessageFor(uporabnik => uporabnik.Eposta)
+                            @Html.Label("Eposta")
+                            @Html.EditorFor(x => x.Eposta)
+                        </div>
+                    </div>
+                    <div id="tabs-3">
+                        <div>
+                            @Html.ValidationMessageFor(uporabnik => uporabnik.Geslo)
+                            @Html.Label("Geslo")
+                            @Html.EditorFor(x => x.Geslo)
+
+                        </div>
+                        <div>
+                            @Html.ValidationMessageFor(uporabnik => uporabnik.Geslo1)
+                            @Html.Label("Geslo1", "Ponovno vnesite geslo")
+                            @Html.EditorFor(x => x.Geslo)
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <input type="submit" value="Naprej" />
+        }
+    </div>*@
+

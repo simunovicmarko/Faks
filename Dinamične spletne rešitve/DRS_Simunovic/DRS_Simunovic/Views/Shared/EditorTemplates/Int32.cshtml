@@ -1,0 +1,29 @@
+﻿@model Int32
+
+
+
+
+@*<script>
+    $(function () {
+        var handle = $("#custom-handle");
+        $("#slider").slider({
+            create: function () {
+                handle.text($(this).slider("value"));
+            },
+            slide: function (event, ui) {
+                handle.text(ui.value);
+            }
+        });
+    });
+</script>*@
+
+<style>
+   .IntSlider{
+       width:200px;
+   }
+</style>
+
+
+@Html.TextBoxFor(x => x, new {@class = "IntSlider", type = "range", step="1"})
+
+

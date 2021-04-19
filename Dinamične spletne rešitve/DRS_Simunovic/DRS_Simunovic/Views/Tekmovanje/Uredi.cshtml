@@ -1,0 +1,12 @@
+﻿@model Tekmovanje
+
+<div>
+    @using (Html.BeginForm("UrediTekmovanje", "Tekmovanje"))
+    {
+        @Html.EditorFor(x => Model)
+        @Html.HiddenFor(x => Model.ID)
+        <input type="submit" value="Uredi" class="btn-dark" />
+    }
+</div>
+
+

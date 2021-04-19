@@ -9,6 +9,14 @@ namespace ORA_REST_API
 {
     public class User
     {
+        public User() { }
+
+        public User(string email, string password)
+        {
+            Email = email;
+            this.password = password;
+        }
+
         [Key]
         public int ID { get; set; }
         public string Email { get; set; }

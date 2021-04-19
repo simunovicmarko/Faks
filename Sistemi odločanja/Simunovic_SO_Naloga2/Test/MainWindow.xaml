@@ -1,0 +1,64 @@
+﻿<Window x:Class="Test.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:syncfusion="clr-namespace:Syncfusion.UI.Xaml.Charts;assembly=Syncfusion.SfChart.WPF"
+            mc:Ignorable="d"
+        Title="Najgrši program, ki sem ga kdaj spisal" Height="450" Width="800">
+
+
+    <StackPanel>
+        <Menu Grid.ColumnSpan="2" >
+            <MenuItem Header="Dodaj alternativo" Height="40" Padding="10">
+                <Label Content="Naziv"/>
+                <TextBox x:Name="AltNameTB" Width="100" Height="25" KeyDown="AltNameTB_KeyDown"/>
+                <Button Content="Dodaj" HorizontalAlignment="Right" Name="AddAltButton" Click="AddAltButton_Click"/>
+            </MenuItem>
+            <MenuItem Header="Dodaj paramter">
+                <Label Content="Naziv"/>
+                <TextBox x:Name="ParamNameTB" Width="100" Height="25" KeyDown="ParamNameTB_KeyDown"/>
+                <Button Content="Dodaj" HorizontalAlignment="Right" Name="AddParamButton" Click="AddParamButton_Click"/>
+
+            </MenuItem>
+            <!--<Button Content="Posodobi" Height="40" Width="100" VerticalAlignment="Center" HorizontalAlignment="Right" Name="UpdateButton" Click="UpdateButton_Click"/>-->
+            <Button Content="Najdi najboljš alternativo" Height="40" Width="142" VerticalAlignment="Center" HorizontalAlignment="Left" Name="FindBest" Click="FindBest_Click"/>
+        </Menu>
+        <TabControl>
+            <TabItem Header="Glavno">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <ScrollViewer>
+                        <StackPanel x:Name="ParameterContainer" Margin="0 55 0 0"></StackPanel>
+                    </ScrollViewer>
+                    <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Auto" >
+                        <StackPanel Orientation="Horizontal" Grid.Column="1" Name="AlternativeContainer"></StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Grafi">
+                <TabControl>
+                    <TabItem Header="Primerjava konččnih vrednosti alternativ">
+                        <syncfusion:SfChart Name="TempChart"/>
+                    </TabItem>
+                    <TabItem Header="Primerjava uteži paramterov">
+                        <syncfusion:SfChart Name="TempChart2"/>
+                    </TabItem>
+                    <TabItem Header="Občutljjivost parametra">
+                        <StackPanel >
+                            <ComboBox Name="ParamCB" Height="40" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" SelectionChanged="ParamCB_SelectionChanged"/>
+                            <syncfusion:SfChart Name="TempChart3" Margin="0 0 0 15"/>
+                        </StackPanel>
+                    </TabItem>
+
+                </TabControl>
+            </TabItem>
+            <TabItem Header="Results" Name="ResultTab">
+                <StackPanel x:Name="ResultPanel" Orientation="Vertical"/>
+            </TabItem>
+        </TabControl>
+    </StackPanel>
+</Window>

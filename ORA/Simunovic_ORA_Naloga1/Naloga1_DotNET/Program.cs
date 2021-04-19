@@ -133,8 +133,10 @@ namespace Naloga1_DotNET
                             }
 
                             Results results1 = new Results(values);
-                            results1.Competitions.Add(competition);
+                            //results1.Competitions.Add(competition);
+                            results1.competition = competition;
                             results.Add(results1);
+                            //competition.results.Add(results1);
                             //competition.results.Add(results1);
                         }
                         resultCounter++;

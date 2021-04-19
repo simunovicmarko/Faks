@@ -1,0 +1,13 @@
+﻿@model Sportnik
+
+<div>
+    @using (Html.BeginForm("UrediSportnika", "Sportnik"))
+    {
+        @Html.EditorFor(x => Model)
+        @Html.HiddenFor(x => Model.ID)
+        <input type="submit" value="Uredi" class="btn-dark" />
+    }
+
+</div>
+
+

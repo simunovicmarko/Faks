@@ -1,0 +1,42 @@
+﻿<Window x:Class="Simunovic_SO_Naloga2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Simunovic_SO_Naloga2"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <!--<Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBox Width="100" Height="50"/>-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.ColumnSpan="2" >
+            <MenuItem Header="Dodaj alternativo" Height="40" Padding="10">
+                <Label Content="Naziv"/>
+                <TextBox x:Name="AltNameTB" Width="100" Height="25"/>
+                <Label Content="Vrednost"/>
+                <TextBox x:Name="AltValueTB" Width="100" Height="25"/>
+                <Button Content="Dodaj" HorizontalAlignment="Right" Name="AddButton" Click="AddButton_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <DataGrid Margin="15 15 0 15" Name="KTDataGridParams" Grid.Row="1" />
+        <DataGrid Margin="0 15 15 15" Name="KTDataGridAlts" Grid.Column="1" Grid.Row="1"/>
+
+        <!--<Label Content="Parametri" Grid.Row="1"/>-->
+
+
+
+    </Grid>
+</Window>

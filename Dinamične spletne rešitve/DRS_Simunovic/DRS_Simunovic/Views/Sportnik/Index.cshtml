@@ -2,18 +2,14 @@
     ViewData["Title"] = "Špotnik";
 }
 
-<div class="d-flex flex-column align-items-center">
-    <div class="card bg-secondary d-flex justify-content-center align-items-center p-4 mb-3 w-75">
-        <h3>@ViewBag.name @ViewBag.lastname</h3>
-        <strong>@ViewBag.date</strong>
-    </div>
-    <div class="card bg-secondary d-flex justify-content-center align-items-center p-4 mb-3 w-75">
-        <h3>@ViewBag.name @ViewBag.lastname</h3>
-        <strong>@ViewBag.date</strong>
-    </div>
-    <div class="card bg-secondary d-flex justify-content-center align-items-center p-4 mb-3 w-75">
-        <h3>@ViewBag.name @ViewBag.lastname</h3>
-        <strong>@ViewBag.date</strong>
-    </div>
+@model VsiSportniki
 
+<div class="d-flex flex-column">
+    <div class="d-flex flex-column align-items-center">
+        @foreach (var sportnik in Model.sportniks)
+        {
+            @Html.DisplayFor(x => sportnik);
+        }
+    </div>
+    <a href="/Sportnik/Dodajanje" class="w-25 align-self-end mt-3"><button class="btn-dark p-2 w-100">Dodaj</button></a>
 </div>

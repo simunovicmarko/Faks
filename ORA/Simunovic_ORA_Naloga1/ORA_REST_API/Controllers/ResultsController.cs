@@ -13,26 +13,17 @@ namespace ORA_REST_API.Controllers
     [ApiController]
     public class ResultsController : ControllerBase
     {
-        // GET: api/<ResultsController>
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-
-        //    return new string[] { "value1", "value2" };
-        //}
-
         [HttpGet]
         public string Get()
         {
-            using (TriatlonContext context = new TriatlonContext())
+            TriatlonContext context = TriatlonContext.Instance;
+
+            var results = context.Results.Take(100).ToList();
+            var json = JsonSerializer.Serialize(results, new JsonSerializerOptions
             {
-                var results = context.Results.Take(100).ToList();
-                var json = JsonSerializer.Serialize(results, new JsonSerializerOptions
-                {
-                    WriteIndented = true,
-                });
-                return json;
-            }
+                WriteIndented = true,
+            });
+            return json;
         }
 
 
@@ -41,55 +32,109 @@ namespace ORA_REST_API.Controllers
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            using (TriatlonContext context = new TriatlonContext())
+            TriatlonContext context = TriatlonContext.Instance;
+            Results results = context.Results.Where(result => result.ID == id).FirstOrDefault();
+            var json = JsonSerializer.Serialize(results, new JsonSerializerOptions
             {
-                Results results = context.Results.Where(result => result.ID == id).FirstOrDefault();
-                var json = JsonSerializer.Serialize(results, new JsonSerializerOptions
-                {
-                    WriteIndented = true,
-                });
-                return json;
-                //return results;
-            }
+                WriteIndented = true,
+            });
+            return json;
+            //return results;
+
         }
         [HttpGet("Athlete")]
-        public string Get([FromQuery]string name)
+        public string Get([FromQuery] string name)
         {
-            using (TriatlonContext context = new TriatlonContext())
+            TriatlonContext context = TriatlonContext.Instance;
+            Results results = context.Results.Where(result => result.Name.Contains(name)).FirstOrDefault();
+            var json = JsonSerializer.Serialize(results, new JsonSerializerOptions
             {
-                Results results = context.Results.Where(result => result.Name.Contains(name)).FirstOrDefault();
-                var json = JsonSerializer.Serialize(results, new JsonSerializerOptions
-                {
-                    WriteIndented = true,
-                });
-                return json;
-                //return results;
-            }
+                WriteIndented = true,
+            });
+            return json;
+            //return results;
+
         }
 
         // POST api/<ResultsController>
         [HttpPost("AddResult")]
-        public void Post([FromBody] Results results)
+        public IActionResult Post([FromBody] Results results)
         {
-            using (TriatlonContext context = new TriatlonContext())
+            TriatlonContext context = TriatlonContext.Instance;
+            try
             {
-                //results.ID = null;
                 context.Results.Add(results);
                 context.SaveChanges();
-                //return results;
+                return Ok();
             }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+
         }
 
-        // PUT api/<ResultsController>/5
+        //
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Results results)
+        public IActionResult Put(int id, [FromBody] Results results)
         {
+            TriatlonContext context = TriatlonContext.Instance;
+            try
+            {
+                Results result = context.Results.Where(x => x.ID == id).First();
+                UpdateResults(results, ref result);
+                context.SaveChanges();
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+                //throw;
+            }
+
         }
 
-        // DELETE api/<ResultsController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        private static void UpdateResults(Results results, ref Results result)
         {
+            result.Age = results.Age;
+            result.Bib = results.Bib;
+            result.Bike = results.Bike;
+            result.BikeDistance = results.BikeDistance;
+            //result.Competitions = results.Competitions;
+            result.Country = results.Country;
+            result.Division = results.Division;
+            result.DivRank = results.DivRank;
+            result.GenderRank = results.GenderRank;
+            result.Name = results.Name;
+            result.Overall = results.Overall;
+            result.OverallRank = results.OverallRank;
+            result.Points = results.Points;
+            result.Profession = results.Profession;
+            result.Run = results.Run;
+            result.RunDistance = results.RunDistance;
+            result.State = results.State;
+            result.Swim = results.Swim;
+            result.SwimDistance = results.SwimDistance;
+            result.T1 = results.T1;
+            result.T2 = results.T2;
+        }
+
+        //DELETE api/<ResultsController>/5
+        [HttpDelete]
+        public IActionResult Delete([FromBody] int id)
+        {
+            TriatlonContext context = TriatlonContext.Instance;
+            try
+            {
+                context.Results.Remove(context.Results.Where(x => x.ID == id).First());
+                context.SaveChanges();
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+
         }
     }
 }

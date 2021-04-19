@@ -1,6 +1,5 @@
 ﻿using DRS_Simunovic.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,19 +12,26 @@ namespace DRS_Simunovic.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            Uporabnik u = new Uporabnik();
-            return View();
+            Uporabnik uporabnik = new Uporabnik();
+            return View(uporabnik);
         }
 
+
+
         [HttpPost]
-        public IActionResult VpisOsnovnihPodatkov(Uporabnik u)
+        public IActionResult Index(Uporabnik uporabnik)
         {
-            TempData["Uporabnik"] = "xxx";
-            TempData["DataIme"] = u.Ime;
-            TempData["DataPriimek"] = u.Priimek;
-            TempData["DataEmso"] = u.EMŠO;
-            TempData["DataDatumRojstva"] = u.DatumRojstva;
-            return RedirectToAction("VpisNaslova");
+            if (ModelState.IsValid)
+            {
+                TempData["Uporabnik"] = "xxx";
+
+                AtletikaContext context = AtletikaContext.Instance;
+                context.uporabniks.Add(uporabnik);
+                context.SaveChanges();
+
+                return RedirectToAction("PrikazPodatkov", uporabnik);
+            }
+            return View();
 
         }
 
@@ -73,27 +79,19 @@ namespace DRS_Simunovic.Controllers
                 return RedirectToAction("PrikazPodatkov");
             }
 
-                return RedirectToAction("Index");
+            return RedirectToAction("Index");
         }
 
 
-        public IActionResult PrikazPodatkov()
+        public IActionResult PrikazPodatkov(Uporabnik uporabnik)
         {
-            if (TempData["VpisniPodatki"] == null)
+            if (TempData["Uporabnik"] == null)
             {
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ime = TempData["DataIme"];
-            ViewBag.priimek = TempData["DataPriimek"];
-            ViewBag.emso = TempData["DataEmso"];
-            ViewBag.datumRojstva = TempData["DataDatumRojstva"];
-            ViewBag.naslov = TempData["DataNaslov"];
-            ViewBag.postna = TempData["DataPostnaStevilka"];
-            ViewBag.drzava = TempData["DataDrzava"];
-            ViewBag.eposta = TempData["DataEposta"];
-            ViewBag.geslo = TempData["DataGeslo"];
-            return View();
+            
+            return View(uporabnik);
         }
 
     }

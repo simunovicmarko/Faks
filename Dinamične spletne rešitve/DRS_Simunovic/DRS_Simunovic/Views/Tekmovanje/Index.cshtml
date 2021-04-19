@@ -1,0 +1,14 @@
+﻿@model VsaTekmovanja
+
+
+    <div  class="d-flex flex-column">
+
+        <div class="d-flex flex-column align-items-center">
+            @foreach (var tekmovanje in Model.Tekmovanjes)
+            {
+                @Html.DisplayFor(x => tekmovanje);
+            }
+        </div>
+        <a href="/Tekmovanje/Dodajanje" class="w-25 align-self-end mt-3"><button class="btn-dark p-2 w-100">Dodaj</button></a>
+
+    </div>

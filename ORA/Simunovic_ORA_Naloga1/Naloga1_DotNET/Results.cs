@@ -15,14 +15,14 @@ namespace Naloga1_DotNET
 
         public Results()
         {
-            this.Competitions = new HashSet<Competition>();
+            //this.Competitions = new HashSet<Competition>();
         }
         //string name, genderRank, divRank, overallRank, bib, division, age, state, country, profession, points, swim, swimDistance, t1, bike, bikeDistance, t2, run, runDistance, overall;
 
         public Results(string[] arr)
         {
             values = arr;
-            Competitions = new HashSet<Competition>();
+            //Competitions = new HashSet<Competition>();
             //Competitions.Add(competition);
             Name = values[0];
             GenderRank = values[1];
@@ -56,7 +56,9 @@ namespace Naloga1_DotNET
         public int ID { get; set; }
 
 
-        public virtual ICollection<Competition> Competitions { get; set; }
+        public Competition competition { get; set; }
+
+        //public virtual ICollection<Competition> Competitions { get; set; }
         // [DataMember]
         public string Name { get; set; }
         //[DataMember]
