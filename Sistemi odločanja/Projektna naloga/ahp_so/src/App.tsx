@@ -1,16 +1,18 @@
-import React from 'react';
-import './index.css';
-import './Components/TreeNode';
-import { TreeNode } from './Components/TreeNode';
+import React from "react";
+import "./index.css";
+import "./Components/TreeNode";
+import { Layout } from "./Layout";
+// import { DataGrid } from '@material-ui/data-grid';
+import { Main } from "./Components/Main";
 
 function App() {
-  return (
-    <div className="App">
-      <div className="m-1">
-        <TreeNode value="neki"/>
-      </div>
-    </div>
-  );
+    return (
+        <div className="App">
+            <Layout>
+                <Main />
+            </Layout>
+        </div>
+    );
 }
 
 export default App;

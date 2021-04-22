@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ORA_REST_API", "ORA_REST_AP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetAPI", "DotNetAPI\DotNetAPI.csproj", "{03A3B91C-C560-4F5D-932F-9E55CF7C2202}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TriatlonNamiznaAplikacija", "TriatlonNamiznaAplikacija\TriatlonNamiznaAplikacija.csproj", "{91278A47-68A9-4C9D-835F-6CA49EFAB3DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{03A3B91C-C560-4F5D-932F-9E55CF7C2202}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03A3B91C-C560-4F5D-932F-9E55CF7C2202}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03A3B91C-C560-4F5D-932F-9E55CF7C2202}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91278A47-68A9-4C9D-835F-6CA49EFAB3DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91278A47-68A9-4C9D-835F-6CA49EFAB3DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91278A47-68A9-4C9D-835F-6CA49EFAB3DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91278A47-68A9-4C9D-835F-6CA49EFAB3DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

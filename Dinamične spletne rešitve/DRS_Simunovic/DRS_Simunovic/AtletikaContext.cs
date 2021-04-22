@@ -1,17 +1,19 @@
 ﻿using DRS_Simunovic.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+//using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace DRS_Simunovic
 {
-    public sealed class AtletikaContext : DbContext
+    public sealed class AtletikaContext : IdentityDbContext<IdentityUser>
     {
         private static AtletikaContext instance = null;
         private static readonly object padlock = new object();
-        private AtletikaContext() : base("Atletika")
+        private AtletikaContext() : base("Atletika", throwIfV1Schema:false)
         {
             //Database.SetInitializer<TriatlonContext>(new BazaInitializier());
         }

@@ -1,4 +1,6 @@
 ﻿using DRS_Simunovic.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,23 +18,35 @@ namespace DRS_Simunovic.Controllers
             return View(uporabnik);
         }
 
+        //private readonly UserManager<IdentityUser> _userManager;
+        //private readonly UserManager<IdentityUser> _userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>());
+
 
 
         [HttpPost]
-        public IActionResult Index(Uporabnik uporabnik)
+        public async Task<IActionResult> Index(Uporabnik uporabnik)
         {
             if (ModelState.IsValid)
             {
-                TempData["Uporabnik"] = "xxx";
 
-                AtletikaContext context = AtletikaContext.Instance;
-                context.uporabniks.Add(uporabnik);
-                context.SaveChanges();
+                IdentityUser user = new IdentityUser { UserName = uporabnik.Eposta, Email = uporabnik.Eposta };
+                //RoleManager<IdentityRole> roleManager = new RoleManager<IdentityRole, "Admin">();
+                UserManager<IdentityUser> _userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(AtletikaContext.Instance));
+                var result = await _userManager.CreateAsync(user, uporabnik.Geslo);
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(user.Id, "User");
+                    TempData["Uporabnik"] = "xxx";
 
-                return RedirectToAction("PrikazPodatkov", uporabnik);
+                    AtletikaContext context = AtletikaContext.Instance;
+                    context.uporabniks.Add(uporabnik);
+                    await context.SaveChangesAsync();
+
+                    return RedirectToAction("PrikazPodatkov", uporabnik);
+                }
+
             }
             return View();
-
         }
 
         [HttpGet]
@@ -90,7 +104,7 @@ namespace DRS_Simunovic.Controllers
                 return RedirectToAction("Index");
             }
 
-            
+
             return View(uporabnik);
         }
 
